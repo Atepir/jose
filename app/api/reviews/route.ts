@@ -11,18 +11,25 @@ export async function POST(request: NextRequest) {
 
         const body = await request.json();
 
+        // Construire l'objet d'insertion
+        const insertData: Record<string, unknown> = {
+            experience_id: body.experienceId,
+            experience_title: body.experienceTitle,
+            author_name: body.authorName,
+            rating: body.rating,
+            comment: body.comment,
+            approved: false, // Les avis doivent être approuvés
+        };
+
+        // Ajouter author_email seulement si fourni
+        if (body.authorEmail) {
+            insertData.author_email = body.authorEmail;
+        }
+
         // eslint-disable-next-line @typescript-eslint/no-explicit-any
         const { data, error } = await (supabase as any)
             .from('reviews')
-            .insert({
-                experience_id: body.experienceId,
-                experience_title: body.experienceTitle,
-                author_name: body.authorName,
-                author_email: body.authorEmail,
-                rating: body.rating,
-                comment: body.comment,
-                approved: false, // Les avis doivent être approuvés
-            })
+            .insert(insertData)
             .select()
             .single();
 
