@@ -62,17 +62,17 @@ export default async function ExperiencesPage() {
                 <div className="absolute top-4 left-4 bg-white px-3 py-1 rounded-full text-sm font-semibold text-gray-800">
                     {experience.type === 'experience' ? 'Expérience' : 'Activité'}
                 </div>
-                <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                <div className="absolute top-4 right-4 bg-[#623E2A] text-white px-3 py-1 rounded-full text-sm font-semibold">
                     {experience.city}
                 </div>
             </div>
             <div className="p-6">
                 <div className="flex items-center gap-2 mb-2">
-                    <span className="text-sm font-medium text-amber-600">{experience.category}</span>
+                    <span className="text-sm font-medium text-[#623E2A]">{experience.category}</span>
                     <span className="text-gray-400">•</span>
                     <span className="text-sm text-gray-500">{experience.duration}</span>
                 </div>
-                <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-amber-600 transition">
+                <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-[#623E2A] transition">
                     {experience.title}
                 </h3>
                 <p className="text-gray-600 mb-4 line-clamp-2">
@@ -85,7 +85,7 @@ export default async function ExperiencesPage() {
                         </span>
                         <span className="text-gray-500 ml-1">FCFA</span>
                     </div>
-                    <span className="text-amber-600 font-semibold group-hover:underline">
+                    <span className="text-[#623E2A] font-semibold group-hover:underline">
                         Voir les détails →
                     </span>
                 </div>
@@ -125,7 +125,7 @@ export default async function ExperiencesPage() {
     return (
         <div className="min-h-screen bg-gray-50">
             {/* Hero Section */}
-            <section className="relative h-[300px] flex items-center justify-center bg-gradient-to-r from-amber-600 to-amber-700">
+            <section className="relative h-[300px] flex items-center justify-center bg-[#623E2A]">
                 <div className="relative z-10 text-center text-white px-4">
                     <h1 className="text-5xl md:text-6xl font-bold mb-4">
                         Nos Expériences
@@ -138,19 +138,19 @@ export default async function ExperiencesPage() {
             <section className="py-8 px-4 bg-white border-b">
                 <div className="max-w-7xl mx-auto">
                     <div className="flex flex-wrap justify-center gap-4">
-                        <a href="#spa" className="px-6 py-3 bg-pink-100 text-pink-700 rounded-full font-semibold hover:bg-pink-200 transition">
+                        <a href="#spa" className="px-6 py-3 bg-[#623E2A]/10 text-[#623E2A] rounded-full font-semibold hover:bg-[#623E2A]/20 transition">
                             Spa & Bien-être
                         </a>
-                        <a href="#restaurants" className="px-6 py-3 bg-orange-100 text-orange-700 rounded-full font-semibold hover:bg-orange-200 transition">
+                        <a href="#restaurants" className="px-6 py-3 bg-[#623E2A]/10 text-[#623E2A] rounded-full font-semibold hover:bg-[#623E2A]/20 transition">
                             Restaurants
                         </a>
-                        <a href="#ateliers" className="px-6 py-3 bg-purple-100 text-purple-700 rounded-full font-semibold hover:bg-purple-200 transition">
+                        <a href="#ateliers" className="px-6 py-3 bg-[#623E2A]/10 text-[#623E2A] rounded-full font-semibold hover:bg-[#623E2A]/20 transition">
                             Ateliers
                         </a>
-                        <a href="#ouagadougou" className="px-6 py-3 bg-amber-100 text-amber-700 rounded-full font-semibold hover:bg-amber-200 transition">
+                        <a href="#ouagadougou" className="px-6 py-3 bg-[#623E2A]/10 text-[#623E2A] rounded-full font-semibold hover:bg-[#623E2A]/20 transition">
                             Ouagadougou
                         </a>
-                        <a href="#bobo" className="px-6 py-3 bg-green-100 text-green-700 rounded-full font-semibold hover:bg-green-200 transition">
+                        <a href="#bobo" className="px-6 py-3 bg-[#623E2A]/10 text-[#623E2A] rounded-full font-semibold hover:bg-[#623E2A]/20 transition">
                             Bobo-Dioulasso
                         </a>
                     </div>
@@ -164,7 +164,7 @@ export default async function ExperiencesPage() {
                     'Détendez-vous et prenez soin de vous dans nos meilleurs spas',
                     '',
                     spaExperiences,
-                    'bg-pink-50'
+                    'bg-gray-50'
                 )}
             </div>
 
@@ -175,7 +175,7 @@ export default async function ExperiencesPage() {
                     'Découvrez la gastronomie burkinabè dans nos restaurants partenaires',
                     '',
                     restaurantExperiences,
-                    'bg-orange-50'
+                    'bg-white'
                 )}
             </div>
 
@@ -186,7 +186,7 @@ export default async function ExperiencesPage() {
                     'Apprenez et créez avec nos artisans locaux',
                     '',
                     atelierExperiences,
-                    'bg-purple-50'
+                    'bg-gray-50'
                 )}
             </div>
 

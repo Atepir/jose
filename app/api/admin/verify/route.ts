@@ -7,7 +7,7 @@ const AUTH_SECRET = process.env.AUTH_SECRET || 'kuuni-secret-key-change-in-produ
 export async function GET(request: NextRequest) {
     try {
         const authHeader = request.headers.get('Authorization');
-        
+
         if (!authHeader || !authHeader.startsWith('Bearer ')) {
             return NextResponse.json(
                 { success: false, error: 'Token manquant' },
@@ -16,12 +16,12 @@ export async function GET(request: NextRequest) {
         }
 
         const token = authHeader.split(' ')[1];
-        
+
         // Décoder et vérifier le token
         try {
             const decoded = Buffer.from(token, 'base64').toString('utf-8');
             const [payloadStr, secret] = decoded.split('.' + AUTH_SECRET);
-            
+
             if (secret !== '') {
                 return NextResponse.json(
                     { success: false, error: 'Token invalide' },
@@ -30,7 +30,7 @@ export async function GET(request: NextRequest) {
             }
 
             const payload = JSON.parse(payloadStr);
-            
+
             // Vérifier l'expiration
             if (payload.exp < Date.now()) {
                 return NextResponse.json(
@@ -39,9 +39,9 @@ export async function GET(request: NextRequest) {
                 );
             }
 
-            return NextResponse.json({ 
-                success: true, 
-                username: payload.username 
+            return NextResponse.json({
+                success: true,
+                username: payload.username
             });
         } catch {
             return NextResponse.json(

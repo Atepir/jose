@@ -58,15 +58,6 @@ export default function Header() {
                                 {link.label}
                             </Link>
                         ))}
-                        <Link
-                            href="/admin"
-                            className={`${pathname?.startsWith('/admin')
-                                ? 'text-amber-600 font-semibold'
-                                : 'text-gray-700 hover:text-amber-600'
-                                } transition`}
-                        >
-                            Admin
-                        </Link>
                     </div>
 
                     {/* Mobile menu button */}
@@ -106,16 +97,6 @@ export default function Header() {
                                     {link.label}
                                 </Link>
                             ))}
-                            <Link
-                                href="/admin"
-                                onClick={() => setMobileMenuOpen(false)}
-                                className={`${pathname?.startsWith('/admin')
-                                    ? 'text-amber-600 font-semibold'
-                                    : 'text-gray-700 hover:text-amber-600'
-                                    } transition py-2`}
-                            >
-                                Admin
-                            </Link>
                         </div>
                     </div>
                 )}

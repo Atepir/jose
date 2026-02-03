@@ -25,10 +25,10 @@ export async function POST(request: NextRequest) {
         // Vérifier les identifiants
         if (username === ADMIN_USERNAME && password === ADMIN_PASSWORD) {
             const token = createToken(username);
-            return NextResponse.json({ 
-                success: true, 
+            return NextResponse.json({
+                success: true,
                 token,
-                message: 'Connexion réussie' 
+                message: 'Connexion réussie'
             });
         }
 

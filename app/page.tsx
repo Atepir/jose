@@ -104,7 +104,7 @@ export default async function Home() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             href="/experiences"
-                            className="bg-amber-600 hover:bg-amber-700 text-white px-10 py-4 rounded-lg text-lg font-semibold transition shadow-lg hover:shadow-xl"
+                            className="bg-[#623E2A] hover:bg-[#4A2E1F] text-white px-10 py-4 rounded-lg text-lg font-semibold transition shadow-lg hover:shadow-xl"
                         >
                             Découvrir nos expériences
                         </Link>
@@ -190,37 +190,31 @@ export default async function Home() {
                                 title: 'Spa & Bien-être',
                                 description: 'Relaxation et soins traditionnels dans les meilleurs spas',
                                 image: 'https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=600',
-                                color: 'from-pink-500 to-rose-600'
                             },
                             {
                                 title: 'Gastronomie locale',
                                 description: 'Dégustez les plats traditionnels burkinabè',
                                 image: 'https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600',
-                                color: 'from-orange-500 to-amber-600'
                             },
                             {
                                 title: 'Ateliers artisanaux',
                                 description: 'Apprenez les techniques des artisans locaux',
                                 image: 'https://images.unsplash.com/photo-1452860606245-08befc0ff44b?w=600',
-                                color: 'from-purple-500 to-violet-600'
                             },
                             {
                                 title: 'Visites culturelles',
                                 description: 'Découvrez les sites historiques et musées',
                                 image: 'https://images.unsplash.com/photo-1569838438570-87eb3f259d58?w=600',
-                                color: 'from-amber-500 to-yellow-600'
                             },
                             {
                                 title: 'Excursions nature',
                                 description: 'Explorez les paysages magnifiques du pays',
                                 image: 'https://images.unsplash.com/photo-1516426122078-c23e76319801?w=600',
-                                color: 'from-green-500 to-emerald-600'
                             },
                             {
                                 title: 'Spectacles & Festivals',
                                 description: 'Vivez les événements culturels locaux',
                                 image: 'https://images.unsplash.com/photo-1533174072545-7a4b6ad7a6c3?w=600',
-                                color: 'from-red-500 to-rose-600'
                             }
                         ].map((activity, index) => (
                             <Link
@@ -234,7 +228,7 @@ export default async function Home() {
                                     fill
                                     className="object-cover group-hover:scale-110 transition duration-500"
                                 />
-                                <div className={`absolute inset-0 bg-gradient-to-t ${activity.color} opacity-70 group-hover:opacity-80 transition`}></div>
+                                <div className="absolute inset-0 bg-gradient-to-t from-[#623E2A] to-[#623E2A]/30 opacity-80 group-hover:opacity-90 transition"></div>
                                 <div className="absolute inset-0 p-6 flex flex-col justify-end text-white">
                                     <h3 className="text-xl font-bold mb-1">{activity.title}</h3>
                                     <p className="text-sm opacity-90">{activity.description}</p>
@@ -272,19 +266,19 @@ export default async function Home() {
                                             fill
                                             className="object-cover group-hover:scale-105 transition duration-300"
                                         />
-                                        <div className="absolute top-4 right-4 bg-amber-600 text-white px-3 py-1 rounded-full text-sm font-semibold">
+                                        <div className="absolute top-4 right-4 bg-[#623E2A] text-white px-3 py-1 rounded-full text-sm font-semibold">
                                             {experience.city}
                                         </div>
                                     </div>
                                     <div className="p-6">
                                         <div className="flex items-center gap-2 mb-2">
-                                            <span className="text-sm font-medium text-amber-600">
+                                            <span className="text-sm font-medium text-[#623E2A]">
                                                 {experience.type === 'experience' ? 'Expérience' : 'Activité'}
                                             </span>
                                             <span className="text-gray-400">•</span>
                                             <span className="text-sm text-gray-500">{experience.category}</span>
                                         </div>
-                                        <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-amber-600 transition">
+                                        <h3 className="text-xl font-bold mb-2 text-gray-800 group-hover:text-[#623E2A] transition">
                                             {experience.title}
                                         </h3>
                                         <p className="text-gray-600 mb-4 line-clamp-2">
@@ -407,7 +401,7 @@ export default async function Home() {
             </section>
 
             {/* Call to Action */}
-            <section className="py-20 px-4 bg-gradient-to-r from-amber-600 to-amber-700 text-white">
+            <section className="py-20 px-4 bg-[#623E2A] text-white">
                 <div className="max-w-4xl mx-auto text-center">
                     <h2 className="text-3xl md:text-4xl font-bold mb-6">
                         Prêt à vivre une expérience inoubliable ?
@@ -418,7 +412,7 @@ export default async function Home() {
                     <div className="flex flex-col sm:flex-row gap-4 justify-center">
                         <Link
                             href="/experiences"
-                            className="inline-block bg-white text-amber-600 px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg"
+                            className="inline-block bg-white text-[#623E2A] px-8 py-4 rounded-lg font-semibold hover:bg-gray-100 transition shadow-lg"
                         >
                             Réserver une expérience
                         </Link>
