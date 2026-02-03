@@ -14,18 +14,99 @@ BEGIN
     END IF;
 END $$;
 
--- 1b. Ajouter author_email à reviews si elle n'existe pas
+-- 1b. Créer la table reviews si elle n'existe pas
+CREATE TABLE IF NOT EXISTS reviews (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    experience_id UUID REFERENCES experiences(id) ON DELETE CASCADE,
+    experience_title TEXT NOT NULL,
+    author_name TEXT NOT NULL,
+    author_email TEXT,
+    rating INTEGER NOT NULL CHECK (rating >= 1 AND rating <= 5),
+    comment TEXT NOT NULL,
+    approved BOOLEAN DEFAULT false,
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
+);
+
+-- 1c. Ajouter author_email à reviews si elle n'existe pas (pour tables existantes)
 DO $$
 BEGIN
-    IF NOT EXISTS (
-        SELECT 1 FROM information_schema.columns 
-        WHERE table_name = 'reviews' AND column_name = 'author_email'
-    ) THEN
-        ALTER TABLE reviews ADD COLUMN author_email TEXT;
+    IF EXISTS (SELECT 1 FROM information_schema.tables WHERE table_name = 'reviews') THEN
+        IF NOT EXISTS (
+            SELECT 1 FROM information_schema.columns 
+            WHERE table_name = 'reviews' AND column_name = 'author_email'
+        ) THEN
+            ALTER TABLE reviews ADD COLUMN author_email TEXT;
+        END IF;
     END IF;
 END $$;
 
--- 2. Créer la table news si elle n'existe pas
+-- 1d. Créer les index pour reviews
+CREATE INDEX IF NOT EXISTS idx_reviews_experience_id ON reviews(experience_id);
+CREATE INDEX IF NOT EXISTS idx_reviews_approved ON reviews(approved);
+CREATE INDEX IF NOT EXISTS idx_reviews_created_at ON reviews(created_at DESC);
+
+-- 1e. Activer RLS sur reviews
+ALTER TABLE reviews ENABLE ROW LEVEL SECURITY;
+
+-- 1f. Policies pour reviews
+DROP POLICY IF EXISTS "Lecture publique des avis" ON reviews;
+CREATE POLICY "Lecture publique des avis"
+    ON reviews FOR SELECT
+    USING (true);
+
+DROP POLICY IF EXISTS "Insertion publique des avis" ON reviews;
+CREATE POLICY "Insertion publique des avis"
+    ON reviews FOR INSERT
+    WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Mise à jour authentifiée des avis" ON reviews;
+CREATE POLICY "Mise à jour authentifiée des avis"
+    ON reviews FOR UPDATE
+    USING (true);
+
+DROP POLICY IF EXISTS "Suppression authentifiée des avis" ON reviews;
+CREATE POLICY "Suppression authentifiée des avis"
+    ON reviews FOR DELETE
+    USING (true);
+
+-- 2. Créer la table booking_requests si elle n'existe pas
+CREATE TABLE IF NOT EXISTS booking_requests (
+    id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+    experience_id UUID REFERENCES experiences(id) ON DELETE CASCADE,
+    experience_title TEXT NOT NULL,
+    name TEXT NOT NULL,
+    email TEXT NOT NULL,
+    phone TEXT NOT NULL,
+    number_of_people INTEGER NOT NULL,
+    preferred_date DATE NOT NULL,
+    message TEXT,
+    status TEXT NOT NULL DEFAULT 'pending' CHECK (status IN ('pending', 'contacted', 'confirmed', 'cancelled')),
+    created_at TIMESTAMP WITH TIME ZONE DEFAULT TIMEZONE('utc', NOW())
+);
+
+-- 2b. Index pour booking_requests
+CREATE INDEX IF NOT EXISTS idx_booking_requests_status ON booking_requests(status);
+CREATE INDEX IF NOT EXISTS idx_booking_requests_created_at ON booking_requests(created_at DESC);
+
+-- 2c. RLS pour booking_requests
+ALTER TABLE booking_requests ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "Lecture publique des réservations" ON booking_requests;
+CREATE POLICY "Lecture publique des réservations"
+    ON booking_requests FOR SELECT
+    USING (true);
+
+DROP POLICY IF EXISTS "Insertion publique des réservations" ON booking_requests;
+CREATE POLICY "Insertion publique des réservations"
+    ON booking_requests FOR INSERT
+    WITH CHECK (true);
+
+DROP POLICY IF EXISTS "Mise à jour authentifiée des réservations" ON booking_requests;
+CREATE POLICY "Mise à jour authentifiée des réservations"
+    ON booking_requests FOR UPDATE
+    USING (true);
+
+-- 3. Créer la table news si elle n'existe pas
 CREATE TABLE IF NOT EXISTS news (
     id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
     title TEXT NOT NULL,
